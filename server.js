@@ -8,6 +8,7 @@ app.use(cors());
 app.use(express.json()) 
 const facultyRoutes = require('./routes/facultyRoutes') // import fucultyRoutes
 const departmentRoutes = require('./routes/departmentRoutes') // import departmentRoutes
+const teacherRoutes = require('./routes/teacherRoutes') // import teacherRoutes
 
 
 mongoose.connect(process.env.MONGO_URI)
@@ -17,6 +18,7 @@ mongoose.connect(process.env.MONGO_URI)
 
     app.use('/api/faculties',facultyRoutes);
     app.use('/api/departments',departmentRoutes);
+    app.use('/api/teachers',teacherRoutes)
 
     const PORT = process.env.PORT || 5005;
 app.listen(PORT, () => {
