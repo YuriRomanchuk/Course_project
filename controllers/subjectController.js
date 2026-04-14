@@ -41,4 +41,5 @@ const getSubject = async (req, res) =>{
 }
 
 
+
 module.exports = { createSubject, getSubject};

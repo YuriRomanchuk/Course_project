@@ -36,5 +36,15 @@ const getResult = async (req, res) =>{
 }
 }
 
+const deleteResult = async (req, res) => {
+    try {
+        await Result.findByIdAndDelete(req.params.id);
+        res.status(200).json({ success: true, message: "Result deleted" });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Server error" });
+    }
+};
 
-module.exports = { createResult, getResult};
+
+
+module.exports = { createResult, getResult , deleteResult};
