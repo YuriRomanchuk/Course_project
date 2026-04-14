@@ -19,7 +19,7 @@ const teacherSchema = new mongoose.Schema({
         required: true
     },
     departmentId:{
-         type: mongoose.Schema.Types.ObjectId, 
+        type: mongoose.Schema.Types.ObjectId, 
         ref: 'Department', // Посилання на модель кафедри
         required: true 
     },

@@ -24,4 +24,20 @@ const createFaculty = async (req , res) => {
     }
 }
 
-module.exports = { createFaculty };
+const getFaculty = async (req, res) =>{
+    try{
+            const faculty = await Faculty.find();
+            res.status(200).json({
+                success: true,
+                data: faculty
+            });
+    }catch(error){
+            console.error("Error create:",error)
+            res.status(500).json({
+                success: false,
+                message: "Server error", error
+            });
+}
+}
+
+module.exports = { createFaculty, getFaculty};
