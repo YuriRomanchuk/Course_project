@@ -11,6 +11,7 @@ const departmentRoutes = require('./routes/departmentRoutes') // import departme
 const teacherRoutes = require('./routes/teacherRoutes') // import teacherRoutes
 const cadetRoutes = require('./routes/cadetRoutes')// import cadetRoutes
 const resultRoutes = require('./routes/resultRoutes') // import  resultRoutes
+const subjectRoutes = require('./routes/subjectRoutes') // import subjectRoutes
 
 
 mongoose.connect(process.env.MONGO_URI)
@@ -23,6 +24,7 @@ mongoose.connect(process.env.MONGO_URI)
     app.use('/api/teachers',teacherRoutes)
     app.use('/api/cadets',cadetRoutes)
     app.use('/api/results',resultRoutes)
+    app.use('/api/subjects',subjectRoutes)
 
     const PORT = process.env.PORT || 5005;
 app.listen(PORT, () => {

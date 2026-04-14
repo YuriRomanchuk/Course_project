@@ -13,7 +13,7 @@ const subjectSchema = new mongoose.Schema({
    teacherId:{
             type: mongoose.Schema.Types.ObjectId, 
            ref: 'Teacher', // Посилання на модель викладач
-           required: true 
+           required: false
        },     
 }, { 
     timestamps: true // Ця фіча автоматично додасть поля createdAt та updatedAt
