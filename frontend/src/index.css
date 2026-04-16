@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+body {
+  background-color: #0f172a; /* Темно-синій фон */
+  color: white; /* Білий текст */
+}
