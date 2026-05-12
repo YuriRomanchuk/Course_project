@@ -26,7 +26,6 @@ const createDepartment = async (req , res) => {
 
 const getDepartments = async (req , res) => {
     try{
-        const {allDepartments} = req.body; 
         const departments = await Department.find();
         
         res.status(200).json({
