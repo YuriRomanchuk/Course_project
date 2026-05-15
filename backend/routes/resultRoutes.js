@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 // import controller
-const { createResult, getResult , deleteResult} = require('../controllers/resultController');
+const { createResult, getResult, updateResult, deleteResult} = require('../controllers/resultController');
 
 router.post('/',createResult);
 router.get('/', getResult);
+router.put('/:id', updateResult);
 router.delete('/:id', deleteResult);
 
 module.exports = router;

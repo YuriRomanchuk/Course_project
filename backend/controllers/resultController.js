@@ -36,15 +36,38 @@ const getResult = async (req, res) =>{
 }
 }
 
+const updateResult = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedResult = await Result.findByIdAndUpdate(
+            id,
+            req.body,
+            { new: true, runValidators: true }
+        );
+        if (!updatedResult) {
+            return res.status(404).json({ success: false, message: 'Result not found' });
+        }
+        res.status(200).json({ success: true, data: updatedResult });
+    } catch (error) {
+        console.error("Error updating:", error);
+        res.status(500).json({ success: false, message: "Server error", error });
+    }
+};
+
 const deleteResult = async (req, res) => {
     try {
-        await Result.findByIdAndDelete(req.params.id);
+        const { id } = req.params;
+        const deletedResult = await Result.findByIdAndDelete(id);
+        if (!deletedResult) {
+            return res.status(404).json({ success: false, message: 'Result not found' });
+        }
         res.status(200).json({ success: true, message: "Result deleted" });
     } catch (error) {
+        console.error("Error deleting:", error);
         res.status(500).json({ success: false, message: "Server error" });
     }
 };
 
 
 
-module.exports = { createResult, getResult , deleteResult};
+module.exports = { createResult, getResult, updateResult, deleteResult};

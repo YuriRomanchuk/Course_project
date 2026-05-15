@@ -44,4 +44,36 @@ const getDepartments = async (req , res) => {
     
 }
 
-module.exports = { createDepartment, getDepartments };
+const updateDepartment = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedDepartment = await Department.findByIdAndUpdate(
+            id,
+            req.body,
+            { new: true, runValidators: true }
+        );
+        if (!updatedDepartment) {
+            return res.status(404).json({ success: false, message: 'Department not found' });
+        }
+        res.status(200).json({ success: true, data: updatedDepartment });
+    } catch (error) {
+        console.error("Error updating:", error);
+        res.status(500).json({ success: false, message: "Server error", error });
+    }
+};
+
+const deleteDepartment = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedDepartment = await Department.findByIdAndDelete(id);
+        if (!deletedDepartment) {
+            return res.status(404).json({ success: false, message: 'Department not found' });
+        }
+        res.status(200).json({ success: true, message: 'Department deleted successfully' });
+    } catch (error) {
+        console.error("Error deleting:", error);
+        res.status(500).json({ success: false, message: "Server error", error });
+    }
+};
+
+module.exports = { createDepartment, getDepartments, updateDepartment, deleteDepartment };

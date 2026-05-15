@@ -40,4 +40,36 @@ const getFaculty = async (req, res) =>{
 }
 }
 
-module.exports = { createFaculty, getFaculty};
+const updateFaculty = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedFaculty = await Faculty.findByIdAndUpdate(
+            id,
+            req.body,
+            { new: true, runValidators: true }
+        );
+        if (!updatedFaculty) {
+            return res.status(404).json({ success: false, message: 'Faculty not found' });
+        }
+        res.status(200).json({ success: true, data: updatedFaculty });
+    } catch (error) {
+        console.error("Error updating:", error);
+        res.status(500).json({ success: false, message: "Server error", error });
+    }
+};
+
+const deleteFaculty = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedFaculty = await Faculty.findByIdAndDelete(id);
+        if (!deletedFaculty) {
+            return res.status(404).json({ success: false, message: 'Faculty not found' });
+        }
+        res.status(200).json({ success: true, message: 'Faculty deleted successfully' });
+    } catch (error) {
+        console.error("Error deleting:", error);
+        res.status(500).json({ success: false, message: "Server error", error });
+    }
+};
+
+module.exports = { createFaculty, getFaculty, updateFaculty, deleteFaculty };
