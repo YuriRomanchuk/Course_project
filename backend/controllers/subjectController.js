@@ -42,4 +42,36 @@ const getSubject = async (req, res) =>{
 
 
 
-module.exports = { createSubject, getSubject};
+const updateSubject = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedSubject = await Subject.findByIdAndUpdate(
+            id,
+            req.body,
+            { new: true, runValidators: true }
+        );
+        if (!updatedSubject) {
+            return res.status(404).json({ success: false, message: 'Subject not found' });
+        }
+        res.status(200).json({ success: true, data: updatedSubject });
+    } catch (error) {
+        console.error("Error updating:", error);
+        res.status(500).json({ success: false, message: "Server error", error });
+    }
+};
+
+const deleteSubject = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedSubject = await Subject.findByIdAndDelete(id);
+        if (!deletedSubject) {
+            return res.status(404).json({ success: false, message: 'Subject not found' });
+        }
+        res.status(200).json({ success: true, message: 'Subject deleted successfully' });
+    } catch (error) {
+        console.error("Error deleting:", error);
+        res.status(500).json({ success: false, message: "Server error", error });
+    }
+};
+
+module.exports = { createSubject, getSubject, updateSubject, deleteSubject };
